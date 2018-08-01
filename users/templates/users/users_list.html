@@ -1,8 +1,17 @@
-<h1>Список пользователей</h1>
-<ul>
-  {% for user in object_list %}
-  <li>
-    <a href="{% url 'users:detail' user.id %}">{{ user.username }} - {{ user.name }}</a>
-  </li>
-  {% endfor %}
-</ul>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>freinds</title>
+  </head>
+
+  <body>
+    <h1>Список пользователей</h1>
+    <ul>
+      {% for user in object_list %}
+      <li>
+        <a href="{% url 'users:detail' user.id %}">{{ user.username }} - {{ user.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

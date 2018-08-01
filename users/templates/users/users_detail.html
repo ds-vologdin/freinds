@@ -1,9 +1,19 @@
-<h1>{{ object.name }} ({{ object.username }})</h1>
-<h2>Друзья</h2>
-<ul>
-  {% for freind in object.get_all_freinds %}
-    <li>
-      <a href="{% url 'users:detail' freind.id %}">{{ freind.username }} - {{ freind.name }}</a>
-    </li>
-  {% endfor %}
-</ul>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>freinds</title>
+  </head>
+
+  <body>
+
+    <h1>{{ object.name }} ({{ object.username }})</h1>
+    <h2>Друзья</h2>
+    <ul>
+      {% for freind in object.get_all_freinds %}
+        <li>
+          <a href="{% url 'users:detail' freind.id %}">{{ freind.username }} - {{ freind.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
