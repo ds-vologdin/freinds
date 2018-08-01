@@ -1,6 +1,12 @@
 from django.contrib import admin
 
-from .models import User
+from .models import User, RequestFreind
+
+
+class RequestFreindsSendInline(admin.TabularInline):
+    model = RequestFreind
+    fk_name = 'from_user'
+    extra = 3
 
 
 class FreindsFromUserInline(admin.TabularInline):
@@ -16,9 +22,18 @@ class FreindsToUserInline(admin.TabularInline):
 
 
 class UserAdmin(admin.ModelAdmin):
-    inlines = [FreindsFromUserInline, FreindsToUserInline]
+    inlines = [
+        FreindsFromUserInline,
+        FreindsToUserInline,
+        RequestFreindsSendInline,
+    ]
     exclude = ('freinds', )
     list_display = ('username', 'name', 'birthday', 'get_all_freinds')
 
 
+class RequestFreindsAdmin(admin.ModelAdmin):
+    list_display = ('from_user', 'to_user', 'datetime_request', 'status')
+
+
 admin.site.register(User, UserAdmin)
+admin.site.register(RequestFreind, RequestFreindsAdmin)
