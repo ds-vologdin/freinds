@@ -82,6 +82,10 @@ class Base(Configuration):
 
 class Dev(DatabaseDevMixins, Base):
     DEBUG = True
+    INSTALLED_APPS = Base.INSTALLED_APPS + ['debug_toolbar']
+    MIDDLEWARE = Base.MIDDLEWARE + [
+        'debug_toolbar.middleware.DebugToolbarMiddleware'
+    ]
     INTERNAL_IPS = ['127.0.0.1']
 
 
