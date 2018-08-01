@@ -28,7 +28,13 @@ class UserAdmin(admin.ModelAdmin):
         RequestFreindsSendInline,
     ]
     exclude = ('freinds', )
-    list_display = ('username', 'name', 'birthday',)
+    list_display = ('username', 'name', 'birthday', 'view_freinds')
+
+    def view_freinds(self, obj):
+        freinds = obj.freinds.all()
+        if freinds:
+            return list(freinds)
+        return
 
 
 class RequestFreindsAdmin(admin.ModelAdmin):
