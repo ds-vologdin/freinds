@@ -9,9 +9,17 @@
     <h1>{{ object.name }} ({{ object.username }})</h1>
     <h2>Друзья</h2>
     <ul>
-      {% for freind in object.get_all_freinds %}
+      {% for freind in object.freinds.all %}
         <li>
           <a href="{% url 'users:detail' freind.id %}">{{ freind.username }} - {{ freind.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <h2>Отправлено приглашений</h2>
+    <ul>
+      {% for request in object.request_freinds_send.all %}
+        <li>
+          {{ request.to_user }} - {{ request.datetime_request }} ({{ request.status }})
         </li>
       {% endfor %}
     </ul>
