@@ -13,6 +13,17 @@ CREATE TABLE "friends" (
   FOREIGN KEY ("to_user_id") REFERENCES "users" ("id") ON DELETE CASCADE
 );
 
+CREATE TABLE "request_friend" (
+  "id" serial NOT NULL PRIMARY KEY,
+  "message" text NOT NULL,
+  "datetime_request" timestamp with time zone NOT NULL,
+  "datetime_accept" timestamp with time zone NULL,
+  "status" varchar(6) NOT NULL,
+  "from_user_id" integer NOT NULL,
+  "to_user_id" integer NOT NULL,
+  FOREIGN KEY ("from_user_id") REFERENCES "users" ("id") ON DELETE CASCADE,
+  FOREIGN KEY ("to_user_id") REFERENCES "users" ("id") ON DELETE CASCADE
+)
 
 CREATE INDEX friends_from_user_id_indx ON friends (from_user_id);
 CREATE INDEX friends_to_user_id_indx ON friends (to_user_id);
