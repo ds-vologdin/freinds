@@ -11,8 +11,6 @@ class Base(Configuration):
     # В linux надо обратить внимание на команду export
     SECRET_KEY = values.SecretValue()
 
-    DEBUG = True
-
     ALLOWED_HOSTS = []
 
     INSTALLED_APPS = [
@@ -36,7 +34,7 @@ class Base(Configuration):
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
 
-    ROOT_URLCONF = 'freinds_project.urls'
+    ROOT_URLCONF = 'friends_project.urls'
 
     TEMPLATES = [
         {
@@ -54,7 +52,7 @@ class Base(Configuration):
         },
     ]
 
-    WSGI_APPLICATION = 'freinds_project.wsgi.application'
+    WSGI_APPLICATION = 'friends_project.wsgi.application'
 
     AUTH_PASSWORD_VALIDATORS = [
         {

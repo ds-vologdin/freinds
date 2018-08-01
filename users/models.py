@@ -11,23 +11,23 @@ class User(models.Model):
     username = SlugField(max_length=50, unique=True)
     name = CharField(max_length=200)
     birthday = DateField(null=True, blank=True)
-    freinds = ManyToManyField('self')
+    friends = ManyToManyField('self')
 
     def __str__(self):
         return '{}: {}'.format(self.username, self.name)
 
 
-class RequestFreind(models.Model):
+class RequestFriend(models.Model):
     STATUS_CHOICES = (
         ('accept', 'Принят'),
         ('deny', 'Отказ'),
         ('none', 'Запрос'),
     )
     from_user = ForeignKey(
-        'User', related_name='request_freinds_send', on_delete=models.CASCADE
+        'User', related_name='request_friends_send', on_delete=models.CASCADE
     )
     to_user = ForeignKey(
-        'User', related_name='request_freinds_recv', on_delete=models.CASCADE
+        'User', related_name='request_friends_recv', on_delete=models.CASCADE
     )
     message = TextField(blank=True)
     datetime_request = DateTimeField(default=timezone.now)
@@ -37,7 +37,7 @@ class RequestFreind(models.Model):
     )
 
     def accept_request(self):
-        self.from_user.freinds.add(self.to_user)
+        self.from_user.friends.add(self.to_user)
         self.status = 'accept'
         self.datetime_accept = timezone.now
         self.save()

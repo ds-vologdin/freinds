@@ -1,45 +1,45 @@
 from django.contrib import admin
 
-from .models import User, RequestFreind
+from .models import User, RequestFriend
 
 
-class RequestFreindsSendInline(admin.TabularInline):
-    model = RequestFreind
+class RequestfriendsSendInline(admin.TabularInline):
+    model = RequestFriend
     fk_name = 'from_user'
     extra = 3
 
 
-class FreindsFromUserInline(admin.TabularInline):
-    model = User.freinds.through
+class friendsFromUserInline(admin.TabularInline):
+    model = User.friends.through
     fk_name = 'from_user'
     extra = 5
 
 
-class FreindsToUserInline(admin.TabularInline):
-    model = User.freinds.through
+class friendsToUserInline(admin.TabularInline):
+    model = User.friends.through
     fk_name = 'to_user'
     extra = 5
 
 
 class UserAdmin(admin.ModelAdmin):
     inlines = [
-        FreindsFromUserInline,
-        FreindsToUserInline,
-        RequestFreindsSendInline,
+        friendsFromUserInline,
+        friendsToUserInline,
+        RequestfriendsSendInline,
     ]
-    exclude = ('freinds', )
-    list_display = ('username', 'name', 'birthday', 'view_freinds')
+    exclude = ('friends', )
+    list_display = ('username', 'name', 'birthday', 'view_friends')
 
-    def view_freinds(self, obj):
-        freinds = obj.freinds.all()
-        if freinds:
-            return list(freinds)
+    def view_friends(self, obj):
+        friends = obj.friends.all()
+        if friends:
+            return list(friends)
         return
 
 
-class RequestFreindsAdmin(admin.ModelAdmin):
+class RequestfriendsAdmin(admin.ModelAdmin):
     list_display = ('from_user', 'to_user', 'datetime_request', 'status')
 
 
 admin.site.register(User, UserAdmin)
-admin.site.register(RequestFreind, RequestFreindsAdmin)
+admin.site.register(RequestFriend, RequestfriendsAdmin)

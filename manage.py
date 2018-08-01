@@ -4,7 +4,7 @@ import sys
 
 if __name__ == "__main__":
     os.environ.setdefault(
-        'DJANGO_SETTINGS_MODULE', 'freinds_project.settings'
+        'DJANGO_SETTINGS_MODULE', 'friends_project.settings'
     )
     os.environ.setdefault('DJANGO_CONFIGURATION', 'ConfigClass')
 
