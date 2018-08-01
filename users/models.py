@@ -39,6 +39,7 @@ class RequestFreind(models.Model):
     def accept_request(self):
         self.from_user.freinds.add(self.to_user)
         self.status = 'accept'
+        self.datetime_accept = timezone.now
         self.save()
 
     def deny_request(self):
