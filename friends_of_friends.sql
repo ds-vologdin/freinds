@@ -37,3 +37,10 @@ WITH RECURSIVE r AS (
 	FROM friends JOIN r ON r.from_user_id = friends.to_user_id
 )
 SELECT from_user_id, to_user_id FROM r ORDER BY from_user_id;
+
+CREATE FUNCTION get_friends_id (user_id integer) RETURNS SETOF integer AS $$
+    SELECT to_user_id FROM friends WHERE from_user_id = $1;
+$$ LANGUAGE SQL;
+
+SELECT DISTINCT ON (friends_id) get_friends_id(to_user_id) friends_id
+FROM friends WHERE from_user_id=1;
